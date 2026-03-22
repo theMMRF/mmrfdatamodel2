@@ -1,6 +1,7 @@
 """This file only contains helper functions about related cases."""
+
 import itertools
-from typing import Collection, Dict, Generator, Iterator, Optional, Set, Union
+from collections.abc import Collection, Generator, Iterator
 
 import psqlgraph
 from sqlalchemy import orm
@@ -11,7 +12,7 @@ from sqlalchemy.orm import unitofwork
 RELATED_CASES_LINK_NAME = "_related_cases"
 
 
-def get_edge_src(edge: psqlgraph.Edge) -> Optional[psqlgraph.Node]:
+def get_edge_src(edge: psqlgraph.Edge) -> psqlgraph.Node | None:
     """Look up edge source node by id if the association proxy is not set.
 
     Args:
@@ -26,13 +27,18 @@ def get_edge_src(edge: psqlgraph.Edge) -> Optional[psqlgraph.Node]:
         src = edge.src
     elif edge.src_id is not None:
         src_class = node_cls.get_subclass_named(edge.__src_class__)
-        src = edge.get_session().query(src_class).filter(src_class.node_id == edge.src_id).first()
+        src = (
+            edge.get_session()
+            .query(src_class)
+            .filter(src_class.node_id == edge.src_id)
+            .first()
+        )
     else:
         src = None
     return src
 
 
-def get_edge_dst(edge: psqlgraph.Edge, allow_query: bool = False) -> Optional[psqlgraph.Node]:
+def get_edge_dst(edge: psqlgraph.Edge, allow_query: bool = False) -> psqlgraph.Node | None:
     """Look up edge destination node.
 
     Args:
@@ -48,14 +54,21 @@ def get_edge_dst(edge: psqlgraph.Edge, allow_query: bool = False) -> Optional[ps
         dst = edge.dst
     elif edge.dst_id is not None and allow_query:
         dst_class = node_cls.get_subclass_named(edge.__dst_class__)
-        dst = edge.get_session().query(dst_class).filter(dst_class.node_id == edge.dst_id).first()
+        dst = (
+            edge.get_session()
+            .query(dst_class)
+            .filter(dst_class.node_id == edge.dst_id)
+            .first()
+        )
     else:
         dst = None
 
     return dst
 
 
-def get_related_cases_from_cache(node: psqlgraph.Node) -> Generator[psqlgraph.Node, None, None]:
+def get_related_cases_from_cache(
+    node: psqlgraph.Node,
+) -> Generator[psqlgraph.Node, None, None]:
     """Get the cached related case ids from this node's case shortcut edges.
 
     Args:
@@ -117,7 +130,7 @@ def get_related_cases_from_parents(node: psqlgraph.Node) -> Iterator[psqlgraph.N
     return filter(None, cases)
 
 
-def update_cache_edges(node: psqlgraph.Node, correct_cases: Dict[str, psqlgraph.Node]) -> None:
+def update_cache_edges(node: psqlgraph.Node, correct_cases: dict[str, psqlgraph.Node]) -> None:
     """Create new edges or deletes old edges.
 
         Given node and a dictionary of correct_cases
@@ -147,7 +160,7 @@ def update_cache_edges(node: psqlgraph.Node, correct_cases: Dict[str, psqlgraph.
 
 
 def cache_related_cases_recursive(
-    node: psqlgraph.Node, visited_nodes: Optional[Set[str]] = None
+    node: psqlgraph.Node, visited_nodes: set[str] | None = None
 ) -> None:
     """Update the related case cache on source node and its children recursively.
 
@@ -197,7 +210,7 @@ def cache_related_cases_on_insert(
     target: psqlgraph.Edge,
     session: orm.Session,
     flush_context: unitofwork.UOWTransaction,
-    instances: Optional[Collection[Union[psqlgraph.Node, psqlgraph.Edge]]],
+    instances: Collection[psqlgraph.Node | psqlgraph.Edge] | None,
 ) -> None:
     """Update the related case cache on source node and its children for edge insertion.
 
@@ -230,7 +243,7 @@ def cache_related_cases_on_update(
     target: psqlgraph.Edge,
     session: orm.Session,
     flush_context: unitofwork.UOWTransaction,
-    instances: Optional[Collection[Union[psqlgraph.Node, psqlgraph.Edge]]],
+    instances: Collection[psqlgraph.Node | psqlgraph.Edge] | None,
 ) -> None:
     """Update the related case cache on source node and its children for edge update.
 
@@ -257,7 +270,7 @@ def cache_related_cases_on_delete(
     target: psqlgraph.Edge,
     session: orm.Session,
     flush_context: unitofwork.UOWTransaction,
-    instances: Optional[Collection[Union[psqlgraph.Node, psqlgraph.Edge]]],
+    instances: Collection[psqlgraph.Node | psqlgraph.Edge] | None,
 ) -> None:
     """Update the related case cache on source node and its children for edge deletion.
 

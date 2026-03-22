@@ -1,5 +1,5 @@
 from copy import copy
-from typing import Any, Type, TypeVar
+from typing import Any, TypeVar
 
 from psqlgraph import Node
 from sqlalchemy import BigInteger, Column, DateTime, Index, Text, text
@@ -19,7 +19,9 @@ class VersionedNode(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<VersionedNode(key={self.key}, label='{self.label}', node_id='{self.node_id}')>"
+        return (
+            f"<VersionedNode(key={self.key}, label='{self.label}', node_id='{self.node_id}')>"
+        )
 
     key = Column(BigInteger, primary_key=True, nullable=False)
 
@@ -73,7 +75,7 @@ class VersionedNode(Base):
     )
 
     @classmethod
-    def clone(cls: Type[T], node: Node) -> T:
+    def clone(cls: type[T], node: Node) -> T:
         return cls(
             label=copy(node.label),
             node_id=copy(node.node_id),
@@ -83,6 +85,7 @@ class VersionedNode(Base):
             system_annotations=copy(node.system_annotations),
             properties=copy(node.properties),
             neighbors=copy(
-                [edge.dst_id for edge in node.edges_out] + [edge.src_id for edge in node.edges_in]
+                [edge.dst_id for edge in node.edges_out]
+                + [edge.src_id for edge in node.edges_in]
             ),
         )

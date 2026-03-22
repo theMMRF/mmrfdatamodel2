@@ -15,10 +15,11 @@ To speed up the query, indexes are built based on secondary keys.
     "index_node_case_project_id_lower",
     "index_node_case_submitter_id_lower",
 """
+
 import hashlib
 import logging
-import sys
-from typing import Any, Iterable, Tuple, Type
+from collections.abc import Iterable
+from typing import Any
 
 import psqlgraph
 import sqlalchemy
@@ -28,7 +29,7 @@ from sqlalchemy.ext import hybrid
 logger = logging.getLogger(__name__)
 
 
-def index_name(cls: Type[psqlgraph.Node], description: str) -> str:
+def index_name(cls: type[psqlgraph.Node], description: str) -> str:
     """Standardize index naming.
 
         Because of PostgreSQL's name character
@@ -58,10 +59,7 @@ def index_name(cls: Type[psqlgraph.Node], description: str) -> str:
         __name = cls.__tablename__.encode("utf-8")
         # hash is not used for security, only used to generate unique names,
         # and all data used are internally generated.
-        if sys.version_info < (3, 9):
-            md5_hash = hashlib.md5(__name)  # nosec
-        else:
-            md5_hash = hashlib.md5(__name, usedforsecurity=False)
+        md5_hash = hashlib.md5(__name, usedforsecurity=False)
 
         short_md5 = md5_hash.hexdigest()[:8]
         short_label = "".join([a[:4] for a in cls.get_label().split("_")])[:20]
@@ -74,7 +72,7 @@ def index_name(cls: Type[psqlgraph.Node], description: str) -> str:
     return name
 
 
-def get_secondary_key_indexes(cls: Type[psqlgraph.Node]) -> Tuple:
+def get_secondary_key_indexes(cls: type[psqlgraph.Node]) -> tuple:
     """Get tuple of indexes on the secondary keys of the class.
 
     Args:

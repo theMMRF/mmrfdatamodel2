@@ -12,10 +12,12 @@ Rules:
     have it set to False.
 4. ver, tag, latest will be set at node creation with hooks.
 """
+
 import os
 import uuid
-from functools import lru_cache
-from typing import Any, Dict, Iterator, List
+from collections.abc import Iterator
+from functools import cache
+from typing import Any
 
 import psqlgraph
 import sqlalchemy
@@ -34,7 +36,7 @@ class TagKeys:
 class TaggingConstraint:
     """Computes whether a node instance supports tagging or not."""
 
-    def __init__(self, path: str, prop: str, values: List[str]) -> None:
+    def __init__(self, path: str, prop: str, values: list[str]) -> None:
         """Initialize TaggingConstraint.
 
         Args:
@@ -49,9 +51,9 @@ class TaggingConstraint:
     def _resolve_target_node_from_path(self, node: psqlgraph.Node) -> psqlgraph.Node:
         """Resolve to the final node instance that can be used to perform the matching.
 
-        e.g: if path = `aligned_reads.submitted_alinged_reads`, the final node used to perform the matching
-        is an instance of SubmittedAlignedReads, which can be reached by following the relationships defined in
-        the path
+        e.g: if path = `aligned_reads.submitted_alinged_reads`, the final node used to
+        perform the matching is an instance of SubmittedAlignedReads, which can be reached
+        by following the relationships defined in the path
             i.e: node["aligned_reads"][0]["submitted_aligned_reads"][0]
             this is equivalent to:
                 node.aligned_reads[0].submitted_aligned_reads[0]
@@ -92,7 +94,7 @@ class TaggingConstraint:
 class TagBuilderConfig:
     """A wrapper around the tagBuilderConfig definition in the dictionary yaml."""
 
-    def __init__(self, cfg: Dict[str, Any]) -> None:
+    def __init__(self, cfg: dict[str, Any]) -> None:
         self.cfg = cfg
 
     def _constraints(self) -> Iterator[TaggingConstraint]:
@@ -117,13 +119,13 @@ class TagBuilderConfig:
         return not any(criteria.match(node) for criteria in self._constraints())
 
 
-def __generate_hash(seed: List[str], label: str) -> str:
+def __generate_hash(seed: list[str], label: str) -> str:
     namespace = UUID_NAMESPACE
     name = f"{seed}-{label}"
     return str(uuid.uuid5(namespace, name))
 
 
-@lru_cache(maxsize=None)
+@cache
 def compute_tag(node: psqlgraph.Node) -> str:
     """Compute unique tag for given node.
 
@@ -144,7 +146,7 @@ def compute_tag(node: psqlgraph.Node) -> str:
 def __get_tagged_version(
     node_id: str, table: sqlalchemy.Table, tag: str, conn: sqlalchemy.engine.Connection
 ) -> int:
-    """Super private function to figure out the proper version number to use just after insertion.
+    """Private function to determine the version number to use just after insertion.
 
     Args:
         node_id (str): current node_id
@@ -164,7 +166,9 @@ def __get_tagged_version(
 
         # reset latest
         r._sysan[TagKeys.latest] = False
-        conn.execute(table.update().where(table.c.node_id == r.node_id).values(_sysan=r._sysan))
+        conn.execute(
+            table.update().where(table.c.node_id == r.node_id).values(_sysan=r._sysan)
+        )
     return max_version + 1
 
 
