@@ -62,6 +62,9 @@ from .case import Case
 from .casememberofproject import CaseMemberOfProject
 from .center import Center
 from .centerdescribesproject import CenterDescribesProject
+from .cgs_risk_key_criteria import CgsRiskKeyCriteria
+from .cgsriskkeycriteriadescribescase import CgsRiskKeyCriteriaDescribesCase
+from .cgsriskkeycriteriarelatestocase import CgsRiskKeyCriteriaRelatesToCase
 from .clinical import Clinical
 from .clinical_supplement import ClinicalSupplement
 from .clinicaldescribescase import ClinicalDescribesCase
@@ -430,6 +433,9 @@ __all__ = [
     "CaseMemberOfProject",
     "Center",
     "CenterDescribesProject",
+    "CgsRiskKeyCriteria",
+    "CgsRiskKeyCriteriaDescribesCase",
+    "CgsRiskKeyCriteriaRelatesToCase",
     "Clinical",
     "ClinicalSupplement",
     "ClinicalDescribesCase",

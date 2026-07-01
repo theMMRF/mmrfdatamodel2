@@ -79,6 +79,10 @@ class Case(base.Node):
                     "name": "cases",
                     "src_type": base.Node.get_subclass("bone_assessment"),
                 },
+                "cgs_risk_key_criteria": {
+                    "name": "cases",
+                    "src_type": base.Node.get_subclass("cgs_risk_key_criteria"),
+                },
                 "clinical_supplements": {
                     "name": "cases",
                     "src_type": base.Node.get_subclass("clinical_supplement"),
@@ -148,6 +152,10 @@ class Case(base.Node):
                 "bone_assessment": {
                     "backref": "cases",
                     "type": base.Node.get_subclass("bone_assessment"),
+                },
+                "cgs_risk_key_criteria": {
+                    "backref": "cases",
+                    "type": base.Node.get_subclass("cgs_risk_key_criteria"),
                 },
                 "clinical_supplements": {
                     "backref": "cases",
