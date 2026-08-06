@@ -192,79 +192,14 @@ class CgsRiskKeyCriteria(base.Node):
         self._set_property("cgs_risk_category", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def criteria_1(self, value):
-        self._set_property("criteria_1", value)  # type: ignore  # inherited from CommonBase
+    @psqlgraph.pg_property(list )
+    def cgs_risk_criteria(self, value):
+        self._set_property("cgs_risk_criteria", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def criteria_2(self, value):
-        self._set_property("criteria_2", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def criteria_3(self, value):
-        self._set_property("criteria_3", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def criteria_4(self, value):
-        self._set_property("criteria_4", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_del17p13(self, value):
-        self._set_property("has_del17p13", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_tp53_mutation(self, value):
-        self._set_property("has_tp53_mutation", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_t414(self, value):
-        self._set_property("has_t414", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_t1416(self, value):
-        self._set_property("has_t1416", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_t1420(self, value):
-        self._set_property("has_t1420", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_1q(self, value):
-        self._set_property("has_1q", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_mono_del1p32(self, value):
-        self._set_property("has_mono_del1p32", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_bi_del1p32(self, value):
-        self._set_property("has_bi_del1p32", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_del1p32(self, value):
-        self._set_property("has_del1p32", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_high_b2m(self, value):
-        self._set_property("has_high_b2m", value)  # type: ignore  # inherited from CommonBase
-
-
-    @psqlgraph.pg_property(str , enum=['FALSE', 'NA', 'TRUE'])
-    def has_normal_creatinine(self, value):
-        self._set_property("has_normal_creatinine", value)  # type: ignore  # inherited from CommonBase
+    @psqlgraph.pg_property(list )
+    def other_criteria(self, value):
+        self._set_property("other_criteria", value)  # type: ignore  # inherited from CommonBase
 
 
 
