@@ -9,7 +9,7 @@ log_file = "plaster.log"
 [profiles]
 
 [profiles.gdcdictionary]
-url = "https://github.com/uc-cdis/mmrf_dictionary.git"
+url = "https://github.com/theMMRF/mmrf_dictionary.git"
 path = "gdcdictionary/schemas"
 version = "master"
 is_git_tag = false
