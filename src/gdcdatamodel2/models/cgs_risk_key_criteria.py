@@ -28,7 +28,7 @@ class CgsRiskKeyCriteria(base.Node):
 
     # _defaults: default value for specified fields in the dictionary
     _defaults:  Dict[str, Union[bool, float, int, str]] = {'state': 'validated'}
-    _dictionary: Dict[str, Union[bool, str, List[str]]] = {'title': 'CGS Risk Key Criteria', 'namespace': 'https://gdc.cancer.gov', 'category': 'clinical', 'submittable': True, 'downloadable': True, 'description': 'Baseline patient-level Clinical Genomic Scoring (CGS) risk classification and key criteria for multiple myeloma.', 'required': ['submitter_id', 'type', 'cgs_risk_category', 'cases'], 'project': '*', 'program': '*', 'previous_version_downloadable': True}
+    _dictionary: Dict[str, Union[bool, str, List[str]]] = {'title': 'CGS Risk Key Criteria', 'namespace': 'https://gdc.cancer.gov', 'category': 'clinical', 'submittable': True, 'downloadable': True, 'description': 'The International Myeloma Society (IMS) and International Myeloma Working Group (IMWG) Consensus Genomic Staging (CGS) defines high-risk multiple myeloma using specific molecular, genetic, and biochemical markers to better predict patient survival and early relapse. This node records the baseline patient-level CGS risk classification and supporting criteria.', 'required': ['submitter_id', 'type', 'cgs_risk_category', 'cases'], 'project': '*', 'program': '*', 'previous_version_downloadable': True}
 
     _pg_backrefs: Optional[Dict[str, Dict[str, Union[str, psqlgraph.Node]]]] = None
     _pg_edges: Optional[Dict[str, Dict[str, Union[str, psqlgraph.Node]]]] = None
@@ -187,7 +187,7 @@ class CgsRiskKeyCriteria(base.Node):
         self._set_property("updated_datetime", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['High', 'NA', 'Standard'])
+    @psqlgraph.pg_property(str , enum=['High Risk', 'NA', 'Standard Risk'])
     def cgs_risk_category(self, value):
         self._set_property("cgs_risk_category", value)  # type: ignore  # inherited from CommonBase
 
