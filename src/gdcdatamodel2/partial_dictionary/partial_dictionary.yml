@@ -6006,6 +6006,16 @@ schema:
           term_url: https://doi.org/10.1200/JCO-24-01893
         type: array
         uniqueItems: true
+      collection_event:
+        description: The event triggering collection of the sample
+        enum:
+        - Baseline
+        termDef:
+          cde_id: null
+          cde_version: null
+          source: null
+          term: null
+          term_url: null
       created_datetime:
         common:
           description: A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
