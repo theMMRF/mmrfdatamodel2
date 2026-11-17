@@ -75,6 +75,10 @@ class Sample(base.Node):
                     "name": "samples",
                     "src_type": base.Node.get_subclass("analyte"),
                 },
+                "files": {
+                    "name": "samples",
+                    "src_type": base.Node.get_subclass("file"),
+                },
                 "pathology_reports": {
                     "name": "samples",
                     "src_type": base.Node.get_subclass("pathology_report"),
@@ -112,6 +116,10 @@ class Sample(base.Node):
                 "diagnoses": {
                     "backref": "samples",
                     "type": base.Node.get_subclass("diagnosis"),
+                },
+                "files": {
+                    "backref": "samples",
+                    "type": base.Node.get_subclass("file"),
                 },
                 "pathology_reports": {
                     "backref": "samples",
@@ -286,6 +294,11 @@ class Sample(base.Node):
     @psqlgraph.pg_property(str , enum=['No', 'Not Allowed To Collect', 'Not Reported', 'Unknown', 'Yes'])
     def diagnosis_pathologically_confirmed(self, value):
         self._set_property("diagnosis_pathologically_confirmed", value)  # type: ignore  # inherited from CommonBase
+
+
+    @psqlgraph.pg_property(str , enum=['Amyloidosis', 'Healthy', 'MGUS', 'Multiple Myeloma', 'Not Reported', 'Smoldering Multiple Myeloma', 'Unknown'])
+    def disease_stage(self, value):
+        self._set_property("disease_stage", value)  # type: ignore  # inherited from CommonBase
 
 
     @psqlgraph.pg_property(str , enum=['Adjacent (< or = 2cm)', 'Distal (>2cm)', 'Not Reported', 'Unknown'])
