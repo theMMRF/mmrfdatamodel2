@@ -6166,9 +6166,8 @@ schema:
       target_type: case
     properties:
       age_at_diagnosis:
-        description: 'Age in days at which a condition or disease was first diagnosed.
-          CDE: 3225640. TCGA has the age in years with CDE 2006657, this is converted
-          by ceil(age*365.25) to get days.'
+        description: Age at which a condition or disease was first diagnosed, in years.
+          MMRF Virtual Lab returns this field in years; do not convert it to days.
         type: number
       batch_id:
         description: GDC submission batch indicator. It is unique within the context
@@ -10912,16 +10911,10 @@ schema:
           term: Adrenal Hormone
           term_url: https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=C2264
       age_at_diagnosis:
-        description: Age at the time of study entry/diagnosis expressed in number
-          of days since birth.
+        description: Age at the time of study entry/diagnosis, in years. MMRF Virtual
+          Lab returns this field in years; do not apply a days-to-years conversion.
         maximum: 32872
         minimum: 0
-        termDef:
-          cde_id: 3225640
-          cde_version: 2.0
-          source: caDSR
-          term: Patient Diagnosis Age Day Value
-          term_url: https://cadsr.cancer.gov/onedata/dmdirect/NIH/NCI/CO/CDEDD?filter=CDEDD.ITEM_ID=3225640%20and%20ver_nr=2.0
         type: integer
       ajcc_clinical_m:
         description: Extent of the distant metastasis for the cancer based on evidence
@@ -20325,6 +20318,12 @@ schema:
         required: false
         target_type: case
       - backref: files
+        label: data_from
+        multiplicity: many_to_many
+        name: samples
+        required: false
+        target_type: sample
+      - backref: files
         label: member_of
         multiplicity: many_to_one
         name: archives
@@ -20902,6 +20901,57 @@ schema:
             term: null
             term_url: null
         type: string
+      samples:
+        anyOf:
+        - items:
+            additionalProperties: true
+            minItems: 1
+            properties:
+              id:
+                pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+                term:
+                  description: 'A 128-bit identifier. Depending on the mechanism used
+                    to generate it, it is either guaranteed to be different from all
+                    other UUIDs/GUIDs generated until 3400 AD or extremely likely
+                    to be different. Its relatively small size lends itself well to
+                    sorting, ordering, and hashing of all sorts, storing in databases,
+                    simple allocation, and ease of programming in general.
+
+                    '
+                  termDef:
+                    cde_id: C54100
+                    cde_version: null
+                    source: NCIt
+                    term: Universally Unique Identifier
+                    term_url: https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&version=16.02d&ns=NCI_Thesaurus&code=C54100
+                type: string
+              submitter_id:
+                type: string
+            type: object
+          type: array
+        - additionalProperties: true
+          properties:
+            id:
+              pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+              term:
+                description: 'A 128-bit identifier. Depending on the mechanism used
+                  to generate it, it is either guaranteed to be different from all
+                  other UUIDs/GUIDs generated until 3400 AD or extremely likely to
+                  be different. Its relatively small size lends itself well to sorting,
+                  ordering, and hashing of all sorts, storing in databases, simple
+                  allocation, and ease of programming in general.
+
+                  '
+                termDef:
+                  cde_id: C54100
+                  cde_version: null
+                  source: NCIt
+                  term: Universally Unique Identifier
+                  term_url: https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&version=16.02d&ns=NCI_Thesaurus&code=C54100
+              type: string
+            submitter_id:
+              type: string
+          type: object
       state:
         common:
           description: The current state of the object.
@@ -41644,6 +41694,18 @@ schema:
           source: null
           term: Post-Diagnostic Pathology Review Confirmation
           term_url: null
+      disease_stage:
+        description: The patient's plasma cell disease stage when the sample was collected,
+          normalized across studies so that samples can be compared and filtered.
+          Healthy means a donor with no known plasma cell disorder.
+        enum:
+        - Healthy
+        - MGUS
+        - Smoldering Multiple Myeloma
+        - Multiple Myeloma
+        - Amyloidosis
+        - Unknown
+        - Not Reported
       distance_normal_to_tumor:
         description: Text term to signify the distance between the tumor tissue and
           the normal control tissue that was procured for matching normal DNA.

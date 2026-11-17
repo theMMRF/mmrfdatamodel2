@@ -121,6 +121,10 @@ class File(base.Node):
                     "backref": "files",
                     "type": base.Node.get_subclass("platform"),
                 },
+                "samples": {
+                    "backref": "files",
+                    "type": base.Node.get_subclass("sample"),
+                },
                 "tags": {
                     "backref": "files",
                     "type": base.Node.get_subclass("tag"),
@@ -142,6 +146,10 @@ class File(base.Node):
                 "core_metadata_collections": {
                     "edge_out": "_FileDataFromCoreMetadataCollection_out",
                     "dst_type": base.Node.get_subclass("core_metadata_collection"),
+                },
+                "samples": {
+                    "edge_out": "_FileDataFromSample_out",
+                    "dst_type": base.Node.get_subclass("sample"),
                 },
         }
 

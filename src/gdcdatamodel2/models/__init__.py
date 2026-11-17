@@ -132,6 +132,7 @@ from .familyhistoryrelatestocase import FamilyHistoryRelatesToCase
 from .file import File
 from .filedatafromcase import FileDataFromCase
 from .filedatafromcoremetadatacollection import FileDataFromCoreMetadataCollection
+from .filedatafromsample import FileDataFromSample
 from .filememberofarchive import FileMemberOfArchive
 from .filerelatestocase import FileRelatesToCase
 from .filtered_copy_number_segment import FilteredCopyNumberSegment
@@ -503,6 +504,7 @@ __all__ = [
     "File",
     "FileDataFromCase",
     "FileDataFromCoreMetadataCollection",
+    "FileDataFromSample",
     "FileMemberOfArchive",
     "FileRelatesToCase",
     "FilteredCopyNumberSegment",
