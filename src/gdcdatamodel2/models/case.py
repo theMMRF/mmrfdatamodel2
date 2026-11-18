@@ -353,6 +353,11 @@ class Case(base.Node):
         self._set_property("lost_to_followup", value)  # type: ignore  # inherited from CommonBase
 
 
+    @psqlgraph.pg_property(str )
+    def original_subject_id(self, value):
+        self._set_property("original_subject_id", value)  # type: ignore  # inherited from CommonBase
+
+
     @psqlgraph.pg_property(str , enum=['Accessory sinuses', 'Adrenal gland', 'Anus and anal canal', 'Base of tongue', 'Bladder', 'Bones, joints and articular cartilage of limbs', 'Bones, joints and articular cartilage of other and unspecified sites', 'Brain', 'Breast', 'Bronchus and lung', 'Cervix uteri', 'Colon', 'Connective, subcutaneous and other soft tissues', 'Corpus uteri', 'Esophagus', 'Eye and adnexa', 'Floor of mouth', 'Gallbladder', 'Gum', 'Heart, mediastinum, and pleura', 'Hematopoietic and reticuloendothelial systems', 'Hypopharynx', 'Kidney', 'Larynx', 'Lip', 'Liver and intrahepatic bile ducts', 'Lymph nodes', 'Meninges', 'Nasal cavity and middle ear', 'Nasopharynx', 'Not Applicable', 'Not Reported', 'Oropharynx', 'Other and ill-defined digestive organs', 'Other and ill-defined sites', 'Other and ill-defined sites in lip, oral cavity and pharynx', 'Other and ill-defined sites within respiratory system and intrathoracic organs', 'Other and unspecified female genital organs', 'Other and unspecified major salivary glands', 'Other and unspecified male genital organs', 'Other and unspecified parts of biliary tract', 'Other and unspecified parts of mouth', 'Other and unspecified parts of tongue', 'Other and unspecified urinary organs', 'Other endocrine glands and related structures', 'Ovary', 'Palate', 'Pancreas', 'Parotid gland', 'Penis', 'Peripheral nerves and autonomic nervous system', 'Placenta', 'Prostate gland', 'Pyriform sinus', 'Rectosigmoid junction', 'Rectum', 'Renal pelvis', 'Retroperitoneum and peritoneum', 'Skin', 'Small intestine', 'Spinal cord, cranial nerves, and other parts of central nervous system', 'Stomach', 'Testis', 'Thymus', 'Thyroid gland', 'Tonsil', 'Trachea', 'Unknown', 'Ureter', 'Uterus, NOS', 'Vagina', 'Vulva'])
     def primary_site(self, value):
         self._set_property("primary_site", value)  # type: ignore  # inherited from CommonBase

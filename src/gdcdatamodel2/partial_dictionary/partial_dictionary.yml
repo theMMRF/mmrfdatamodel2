@@ -5513,6 +5513,11 @@ schema:
           source: caDSR
           term: Patient Lost Follow-up Indicator
           term_url: https://cadsr.cancer.gov/onedata/dmdirect/NIH/NCI/CO/CDEDD?filter=CDEDD.ITEM_ID=6161018%20and%20ver_nr=1.0
+      original_subject_id:
+        description: The participant identifier exactly as the contributing study
+          recorded it, before it was given this data commons' submitter ID. Use it
+          to trace a case back to the study's own records.
+        type: string
       primary_site:
         description: The text term used to describe the primary site of disease, as
           categorized by the World Health Organization's (WHO) International Classification
@@ -41930,6 +41935,11 @@ schema:
           source: caDSR
           term: Tissue Sample Optimal Cutting Temperature Compound Embedding Indicator
           term_url: https://cadsr.cancer.gov/onedata/dmdirect/NIH/NCI/CO/CDEDD?filter=CDEDD.ITEM_ID=5432538%20and%20ver_nr=1.0
+        type: string
+      original_sample_id:
+        description: The sample identifier exactly as the contributing study recorded
+          it, before it was given this data commons' submitter ID. Use it to trace
+          a sample back to the study's own records.
         type: string
       passage_count:
         description: Number of passages (splits) between the original tissue and this
