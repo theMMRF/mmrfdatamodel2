@@ -351,6 +351,11 @@ class Sample(base.Node):
         self._set_property("oct_embedded", value)  # type: ignore  # inherited from CommonBase
 
 
+    @psqlgraph.pg_property(str )
+    def original_sample_id(self, value):
+        self._set_property("original_sample_id", value)  # type: ignore  # inherited from CommonBase
+
+
     @psqlgraph.pg_property(int )
     def passage_count(self, value):
         self._set_property("passage_count", value)  # type: ignore  # inherited from CommonBase
