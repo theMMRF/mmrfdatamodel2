@@ -1040,6 +1040,7 @@ schema:
         description: Broad categorization of the contents of the data file.
         enum:
         - Sequencing Reads
+        - Immune Repertoire
         termDef:
           cde_id: null
           cde_version: null
@@ -1051,6 +1052,7 @@ schema:
         enum:
         - BAM
         - CRAM
+        - FASTQ
         termDef:
           cde_id: null
           cde_version: null
@@ -1704,6 +1706,8 @@ schema:
         - Sequencing Data
         - Sequencing Reads
         - Raw Sequencing Data
+        - Chromatin Accessibility
+        - Immune Repertoire
         termDef:
           cde_id: null
           cde_version: null
@@ -6876,6 +6880,7 @@ schema:
         description: The sequencing strategy used to generate the data file.
         enum:
         - WGS
+        - WXS
         termDef:
           cde_id: null
           cde_version: null
@@ -8038,6 +8043,7 @@ schema:
         description: Format of the data files.
         enum:
         - TXT
+        - SEG
         termDef:
           cde_id: null
           cde_version: null
@@ -9052,6 +9058,7 @@ schema:
         description: Broad categorization of the contents of the data file.
         enum:
         - Flow Cytometry
+        - Proteome Profiling
         termDef:
           cde_id: null
           cde_version: null
@@ -9072,6 +9079,7 @@ schema:
         description: Specific content type of the data file.
         enum:
         - Raw Flow Cytometry Data
+        - Raw Mass Cytometry Data
         termDef:
           cde_id: null
           cde_version: null
@@ -47078,6 +47086,8 @@ schema:
         description: Broad categorization of the contents of the data file.
         enum:
         - Sequencing Reads
+        - Chromatin Accessibility
+        - Immune Repertoire
         termDef:
           cde_id: null
           cde_version: null
@@ -49316,6 +49326,8 @@ schema:
         description: Broad categorization of the contents of the data file.
         enum:
         - Sequencing Reads
+        - Chromatin Accessibility
+        - Immune Repertoire
         termDef:
           cde_id: null
           cde_version: null

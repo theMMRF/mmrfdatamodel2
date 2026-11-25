@@ -250,7 +250,7 @@ class CopyNumberAuxiliaryFile(base.Node):
         self._set_property("data_type", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['WGS'])
+    @psqlgraph.pg_property(str , enum=['WGS', 'WXS'])
     def experimental_strategy(self, value):
         self._set_property("experimental_strategy", value)  # type: ignore  # inherited from CommonBase
 

@@ -359,12 +359,12 @@ class AlignedReads(base.Node):
         self._set_property("contamination_error", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['Sequencing Reads'])
+    @psqlgraph.pg_property(str , enum=['Immune Repertoire', 'Sequencing Reads'])
     def data_category(self, value):
         self._set_property("data_category", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['BAM', 'CRAM'])
+    @psqlgraph.pg_property(str , enum=['BAM', 'CRAM', 'FASTQ'])
     def data_format(self, value):
         self._set_property("data_format", value)  # type: ignore  # inherited from CommonBase
 

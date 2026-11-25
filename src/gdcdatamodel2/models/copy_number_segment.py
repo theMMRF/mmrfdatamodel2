@@ -264,7 +264,7 @@ class CopyNumberSegment(base.Node):
         self._set_property("data_category", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['TXT'])
+    @psqlgraph.pg_property(str , enum=['SEG', 'TXT'])
     def data_format(self, value):
         self._set_property("data_format", value)  # type: ignore  # inherited from CommonBase
 
