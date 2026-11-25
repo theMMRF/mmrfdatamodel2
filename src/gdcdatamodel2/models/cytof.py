@@ -230,7 +230,7 @@ class Cytof(base.Node):
         self._set_property("object_id", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['Flow Cytometry'])
+    @psqlgraph.pg_property(str , enum=['Flow Cytometry', 'Proteome Profiling'])
     def data_category(self, value):
         self._set_property("data_category", value)  # type: ignore  # inherited from CommonBase
 
@@ -240,7 +240,7 @@ class Cytof(base.Node):
         self._set_property("data_format", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['Raw Flow Cytometry Data'])
+    @psqlgraph.pg_property(str , enum=['Raw Flow Cytometry Data', 'Raw Mass Cytometry Data'])
     def data_type(self, value):
         self._set_property("data_type", value)  # type: ignore  # inherited from CommonBase
 

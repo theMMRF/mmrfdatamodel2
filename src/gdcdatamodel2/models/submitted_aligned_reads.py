@@ -286,7 +286,7 @@ class SubmittedAlignedReads(base.Node):
         self._set_property("object_id", value)  # type: ignore  # inherited from CommonBase
 
 
-    @psqlgraph.pg_property(str , enum=['Sequencing Reads'])
+    @psqlgraph.pg_property(str , enum=['Chromatin Accessibility', 'Immune Repertoire', 'Sequencing Reads'])
     def data_category(self, value):
         self._set_property("data_category", value)  # type: ignore  # inherited from CommonBase
 
